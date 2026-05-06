@@ -56,23 +56,30 @@ button:hover {
     position: relative;
     width: 100%;
     flex-wrap: wrap;
+    min-height: 80px;
 }
 
 #yes {
     background-color: #6b8f71;
     color: white;
     transition: font-size 0.2s ease, padding 0.2s ease, transform 0.2s ease;
-}
-
-#yes:hover {
-    background-color: #5e8065;
+    position: relative;
+    z-index: 1;
 }
 
 #no {
     background-color: #c86b6b;
     color: white;
     position: relative;
+    z-index: 2;
+    touch-action: manipulation;
 }
+
+#yes:hover {
+    background-color: #5e8065;
+}
+
+
 
 #no:hover {
     background-color: #b85c5c;

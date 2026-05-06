@@ -1,30 +1,65 @@
 document.addEventListener("DOMContentLoaded", function () {
     const noButton = document.getElementById("no");
     const yesButton = document.getElementById("yes");
+    const buttonContainer = document.getElementById("button-container");
 
     let yesSize = 1;
 
-    noButton.addEventListener("mouseover", function () {
+    function moveNoButton() {
         noButton.style.position = "absolute";
 
-        const buttonContainer = document.getElementById("button-container");
         const containerRect = buttonContainer.getBoundingClientRect();
-        const buttonWidth = noButton.clientWidth;
-        const buttonHeight = noButton.clientHeight;
+        const yesRect = yesButton.getBoundingClientRect();
+        const noWidth = noButton.offsetWidth;
+        const noHeight = noButton.offsetHeight;
 
-        const maxX = containerRect.width - buttonWidth;
-        const maxY = containerRect.height - buttonHeight;
+        const maxX = containerRect.width - noWidth;
+        const maxY = containerRect.height - noHeight;
 
-        const x = Math.random() * Math.max(maxX, 0);
-        const y = Math.random() * Math.max(maxY, 0);
+        let x = 0;
+        let y = 0;
+        let tries = 0;
+
+        do {
+            x = Math.random() * Math.max(maxX, 0);
+            y = Math.random() * Math.max(maxY, 0);
+            tries++;
+
+            const proposedRect = {
+                left: containerRect.left + x,
+                top: containerRect.top + y,
+                right: containerRect.left + x + noWidth,
+                bottom: containerRect.top + y + noHeight
+            };
+
+            const overlapsYes = !(
+                proposedRect.right < yesRect.left ||
+                proposedRect.left > yesRect.right ||
+                proposedRect.bottom < yesRect.top ||
+                proposedRect.top > yesRect.bottom
+            );
+
+            if (!overlapsYes) {
+                break;
+            }
+        } while (tries < 20);
 
         noButton.style.left = `${x}px`;
         noButton.style.top = `${y}px`;
 
         yesSize += 0.25;
-
         yesButton.style.fontSize = `${1.2 * yesSize}rem`;
         yesButton.style.padding = `${10 * yesSize}px ${20 * yesSize}px`;
+    }
+
+    // Desktop: cuando el mouse entra
+    noButton.addEventListener("mouseenter", moveNoButton);
+
+    // Mobile / touch: cuando el dedo toca
+    noButton.addEventListener("pointerdown", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        moveNoButton();
     });
 
     yesButton.addEventListener("click", function () {
