@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let yesSize = 1;
 
+    let lastX = 0;
+    let lastY = 0;
+    let isFirstMove = true;
+
     function moveNoButton() {
         noButton.style.position = "absolute";
 
@@ -16,14 +20,29 @@ document.addEventListener("DOMContentLoaded", function () {
         const maxX = containerRect.width - noWidth;
         const maxY = containerRect.height - noHeight;
 
+        const minShift = 120; // distancia mínima que debe alejarse
+        const maxAttempts = 30;
+
         let x = 0;
         let y = 0;
         let tries = 0;
 
         do {
-            x = Math.random() * Math.max(maxX, 0);
-            y = Math.random() * Math.max(maxY, 0);
-            tries++;
+            if (isFirstMove) {
+                x = Math.random() * Math.max(maxX, 0);
+                y = Math.random() * Math.max(maxY, 0);
+            } else {
+                // se mueve mucho más lejos que la posición anterior
+                const deltaX = (Math.random() * 2 - 1) * 180;
+                const deltaY = (Math.random() * 2 - 1) * 180;
+
+                x = lastX + deltaX;
+                y = lastY + deltaY;
+            }
+
+            // mantener dentro del contenedor
+            x = Math.max(0, Math.min(x, maxX));
+            y = Math.max(0, Math.min(y, maxY));
 
             const proposedRect = {
                 left: containerRect.left + x,
@@ -39,23 +58,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 proposedRect.top > yesRect.bottom
             );
 
-            if (!overlapsYes) {
+            const movedEnough = Math.abs(x - lastX) > minShift || Math.abs(y - lastY) > minShift;
+
+            tries++;
+
+            if (!overlapsYes && (isFirstMove || movedEnough)) {
                 break;
             }
-        } while (tries < 20);
+        } while (tries < maxAttempts);
 
         noButton.style.left = `${x}px`;
         noButton.style.top = `${y}px`;
+
+        lastX = x;
+        lastY = y;
+        isFirstMove = false;
 
         yesSize += 0.25;
         yesButton.style.fontSize = `${1.2 * yesSize}rem`;
         yesButton.style.padding = `${10 * yesSize}px ${20 * yesSize}px`;
     }
 
-    // Desktop: cuando el mouse entra
     noButton.addEventListener("mouseenter", moveNoButton);
 
-    // Mobile / touch: cuando el dedo toca
     noButton.addEventListener("pointerdown", function (e) {
         e.preventDefault();
         e.stopPropagation();
