@@ -21,6 +21,6 @@ function showDate() {
         const formattedDate = date.toLocaleString('en-GB', options).replace(',', '');
     
         // Display the formatted date
-        document.getElementById("dateDisplay").innerText = `Great! Our date is set for: ${formattedDate}`;
+        document.getElementById("dateDisplay").innerText = `Bien! La cita sera el: ${formattedDate}`;
     }
 }

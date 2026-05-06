@@ -6,22 +6,21 @@
     <title>Pick a Date</title>
     <link rel="stylesheet" href="date.css">
     <script src="date.js" defer></script>
-    
 </head>
 <body>
-
     <div class="container">
-
-        <video autoplay loop muted>
-            <source src="happyMelody.mp4" type="video/mp4">
+        <video autoplay loop muted playsinline class="celebration-video">
+            <source src="YesSpongeBob.mp4" type="video/mp4">
         </video>
-        <h1>Yayyyyyyyyy! </h1>
-        <h1>Now Choose a Date & Time 💖</h1>
+
+        <h1>Yay!</h1>
+        <p class="subtitle">Elige una fecha y hora, sé que eres una chica ocupada ;)</p>
+
+        <label for="dateInput" class="input-label">La cita sera el</label>
         <input type="datetime-local" id="dateInput">
+
         <button onclick="showDate()">Confirm</button>
         <p id="dateDisplay"></p>
-
     </div>
-
 </body>
 </html>

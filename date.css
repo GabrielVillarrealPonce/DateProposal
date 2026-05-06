@@ -1,85 +1,126 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffe6e6;
+    background: linear-gradient(180deg, #f4f1ee, #ebe6e1);
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    color: #2f2f2f;
 }
 
 .container {
     background-color: #ffffff;
-    border-radius: 15px;
-    padding: 30px;
+    border-radius: 18px;
+    padding: 32px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: min(90%, 560px);
+    border: 1px solid #e7e1db;
+}
+
+.celebration-video {
+    width: 180px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 18px auto;
+    border-radius: 14px;
 }
 
 h1 {
     font-size: 2rem;
-    color: #ff6f61;
-    margin-bottom: 20px;
+    color: #4a3f39;
+    margin: 0 0 10px 0;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #6b625d;
+    margin: 0 0 22px 0;
+}
+
+.input-label {
+    display: block;
+    text-align: left;
+    font-size: 0.95rem;
+    color: #4a3f39;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 input[type="datetime-local"] {
-    padding: 10px;
+    padding: 12px 14px;
     font-size: 1rem;
-    border: 2px solid #ff6f61;
-    border-radius: 5px;
+    border: 1px solid #cfc6bf;
+    border-radius: 10px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    box-sizing: border-box;
+    background: #faf8f6;
+    color: #2f2f2f;
+    outline: none;
+}
+
+input[type="datetime-local"]:focus {
+    border-color: #8a7f78;
+    box-shadow: 0 0 0 3px rgba(138, 127, 120, 0.15);
 }
 
 button {
-    background-color: #ff6f61;
+    background-color: #6b8f71;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border-radius: 5px;
+    padding: 12px 24px;
+    font-size: 1.05rem;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 button:hover {
-    background-color: #ff4d40;
+    background-color: #5e8065;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
 p#dateDisplay {
-    font-size: 1.5rem;
-    color: #ffffff;
-    background-color: #ff6f61;
-    padding: 15px;
-    border-radius: 10px;
+    font-size: 1.1rem;
+    color: #4a3f39;
+    background-color: #f7f3ef;
+    padding: 14px;
+    border-radius: 12px;
     margin-top: 20px;
-    font-weight: bold;
+    font-weight: 600;
     width: 100%;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    box-sizing: border-box;
+    border: 1px solid #e7e1db;
+}
+
+.celebration-video {
+    width: 100%;
+    max-width: 520px;
+    display: block;
+    margin: 0 auto 24px auto;
+    border-radius: 18px;
 }
 
 @media (max-width: 600px) {
+    .container {
+        width: 92%;
+        padding: 22px;
+    }
+
     h1 {
-        font-size: 1.5rem;
-}
+        font-size: 1.6rem;
+    }
 
-.container {
-        width: 90%;
-        padding: 15px;
-}
+    .celebration-video {
+        max-width: 100%;
+    }
 
-input[type="datetime-local"], button {
+    input[type="datetime-local"],
+    button {
         font-size: 1rem;
-        width: 100%;
     }
 }
-
-video{
-    width: 50%
-}
-
