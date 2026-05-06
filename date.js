@@ -2,7 +2,7 @@ function showDate() {
     const inputDate = document.getElementById("dateInput").value;
 
     if (!inputDate) {
-        document.getElementById("dateDisplay").innerHTML = "You haven't chosen the date yet :( "
+        document.getElementById("dateDisplay").innerHTML = "Aun no elegiste una fecha :( "
 
     } else {
 
